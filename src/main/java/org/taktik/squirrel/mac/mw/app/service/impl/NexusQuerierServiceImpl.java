@@ -18,16 +18,16 @@ import org.taktik.squirrel.mac.mw.app.service.NexusQuerierService;
 
 @Service
 public class NexusQuerierServiceImpl implements NexusQuerierService {
-	@Value("${nexusServer}")
+	@Value("${mw.nexus.server}")
 	private String nexusServer;
 
-	@Value("${username}")
+	@Value("${mw.nexus.username}")
 	private String username;
 
-	@Value("${password}")
+	@Value("${mw.nexus.password}")
 	private String password;
 
-	@Value("${repository}")
+	@Value("${mw.nexus.repository}")
 	private String repository;
 
 	@Override
