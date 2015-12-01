@@ -3,8 +3,8 @@ package org.taktik.squirrel.mac.mw.service;
 import com.thoughtworks.xstream.XStream;
 import org.junit.Assert;
 import org.junit.Test;
-import org.taktik.squirrel.mac.mw.app.domain.MavenPackage;
-import org.taktik.squirrel.mac.mw.app.domain.NexusResponse;
+import org.taktik.squirrel.mac.mw.domain.MavenPackage;
+import org.taktik.squirrel.mac.mw.domain.NexusResponse;
 
 public class NexusQueryServiceTest {
 	@Test

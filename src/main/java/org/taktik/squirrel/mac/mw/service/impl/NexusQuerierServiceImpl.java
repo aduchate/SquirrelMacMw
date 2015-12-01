@@ -1,8 +1,13 @@
-package org.taktik.squirrel.mac.mw.app.service.impl;
+package org.taktik.squirrel.mac.mw.service.impl;
 
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 
 import com.thoughtworks.xstream.XStream;
+import org.apache.commons.codec.binary.Base64;
+import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,9 +17,9 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriTemplateHandler;
-import org.taktik.squirrel.mac.mw.app.domain.MavenPackage;
-import org.taktik.squirrel.mac.mw.app.domain.NexusResponse;
-import org.taktik.squirrel.mac.mw.app.service.NexusQuerierService;
+import org.taktik.squirrel.mac.mw.domain.MavenPackage;
+import org.taktik.squirrel.mac.mw.domain.NexusResponse;
+import org.taktik.squirrel.mac.mw.service.NexusQuerierService;
 
 @Service
 public class NexusQuerierServiceImpl implements NexusQuerierService {
@@ -64,10 +69,21 @@ public class NexusQuerierServiceImpl implements NexusQuerierService {
 	}
 
 	@Override
-	public URI getUri(MavenPackage p) {
+	public URI getUri(String groupId, String artifactId, String version) {
 		DefaultUriTemplateHandler defaultUriTemplateHandler = new DefaultUriTemplateHandler();
 
 		String url = nexusServer + "/service/local/artifact/maven/content?r={repository}&g={groupId}&a={artifactId}&v={version}&p=zip";
-		return defaultUriTemplateHandler.expand(url, repository, p.getGroupId(), p.getArtifactId(), p.getVersion());
+		URI expand = defaultUriTemplateHandler.expand(url, repository, groupId, artifactId, version);
+
+		return expand;
 	}
+
+	@Override
+	public String getAuthHeader() {
+		String auth = username + ":" + password;
+		byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
+		return "Basic " + new String(encodedAuth);
+	}
+
+
 }

@@ -1,4 +1,4 @@
-package org.taktik.squirrel.mac.mw.app.exception;
+package org.taktik.squirrel.mac.mw.exception;
 
 
 import org.springframework.http.HttpStatus;

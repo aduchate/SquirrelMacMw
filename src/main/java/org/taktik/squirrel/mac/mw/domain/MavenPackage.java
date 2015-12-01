@@ -1,4 +1,4 @@
-package org.taktik.squirrel.mac.mw.app.domain;
+package org.taktik.squirrel.mac.mw.domain;
 
 public class MavenPackage {
 	private Boolean presentLocally;
