@@ -47,8 +47,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
 
+    compile("org.eclipse.jetty:jetty-proxy:9.2.14.v20151106")
+    compile("org.apache.httpcomponents:httpasyncclient:4.1.1")
     compile("com.thoughtworks.xstream:xstream:1.4.8")
     compile("com.fasterxml.jackson.core:jackson-annotations:2.7.0-rc1")
+
     testCompile("junit:junit")
     testCompile("org.springframework:spring-test")
 }
