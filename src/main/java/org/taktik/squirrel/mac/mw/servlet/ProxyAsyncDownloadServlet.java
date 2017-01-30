@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpHeaders;
+import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.http.HttpField;
@@ -37,7 +38,12 @@ public class ProxyAsyncDownloadServlet extends AsyncProxyServlet {
 			String groupId = matcher.group(1);
 			String artifactId = matcher.group(2);
 
-			return nexusQuerierService.getUri(groupId, artifactId, version).toString();
+			try {
+				return nexusQuerierService.getUri(groupId, artifactId, version).toString();
+			} catch (ArtifactResolutionException e) {
+				e.printStackTrace();
+				return null;
+			}
 		} else {
 			return null;
 		}

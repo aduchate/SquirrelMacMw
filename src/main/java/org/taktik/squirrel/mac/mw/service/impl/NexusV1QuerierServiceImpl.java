@@ -21,18 +21,18 @@ import org.taktik.squirrel.mac.mw.domain.MavenPackage;
 import org.taktik.squirrel.mac.mw.domain.NexusResponse;
 import org.taktik.squirrel.mac.mw.service.NexusQuerierService;
 
-@Service
-public class NexusQuerierServiceImpl implements NexusQuerierService {
-	@Value("${mw.nexus.server}")
+//@Service
+public class NexusV1QuerierServiceImpl implements NexusQuerierService {
+	@Value("${mw.maven.server}")
 	private String nexusServer;
 
-	@Value("${mw.nexus.username}")
+	@Value("${mw.maven.username}")
 	private String username;
 
-	@Value("${mw.nexus.password}")
+	@Value("${mw.maven.password}")
 	private String password;
 
-	@Value("${mw.nexus.repository}")
+	@Value("${mw.maven.repository}")
 	private String repository;
 
 	@Override

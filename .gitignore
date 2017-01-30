@@ -1,3 +1,7 @@
-SquirrelMacMw.iml
-SquirrelMacMw.ipr
-SquirrelMacMw.iws
+.idea
+.gradle
+.gradletasknamecache
+build
+out
+target
+

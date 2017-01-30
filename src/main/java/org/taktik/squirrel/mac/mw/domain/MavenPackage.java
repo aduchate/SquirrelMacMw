@@ -10,6 +10,16 @@ public class MavenPackage {
 	private Boolean snapshot;
 	private String snapshotBuildNumber;
 
+	public MavenPackage() {
+	}
+
+	public MavenPackage(String groupId, String artifactId, String version) {
+
+		this.groupId = groupId;
+		this.artifactId = artifactId;
+		this.version = version;
+	}
+
 	public Boolean getPresentLocally() {
 		return presentLocally;
 	}

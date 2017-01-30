@@ -1,11 +1,13 @@
 package org.taktik.squirrel.mac.mw.domain;
 
+import java.io.Serializable;
 import java.net.URI;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class UpdateResponse {
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
+public class UpdateResponse implements Serializable{
 	String url;
 	String name;
 	String notes;
