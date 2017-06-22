@@ -40,7 +40,7 @@ public class MainController {
 						 HttpServletResponse response) throws NoContentAvailableException, VersionRangeResolutionException {
 
 		if (version==null) { version = "0.0.0"; }
-		MavenPackage latestVersion = nexusQuerierService.getLatestVersion(groupId, artifactId);
+		MavenPackage latestVersion = nexusQuerierService.getLatestVersion(groupId, artifactId, request.getRemoteHost());
 		if (latestVersion.getVersion().equals(version) || version.compareTo(latestVersion.getVersion()) > 0) {
 			throw new NoContentAvailableException();
 		}

@@ -36,7 +36,7 @@ public class NexusV1QuerierServiceImpl implements NexusQuerierService {
 	private String repository;
 
 	@Override
-	public MavenPackage getLatestVersion(String groupId, String artifactId) {
+	public MavenPackage getLatestVersion(String groupId, String artifactId, String ip) {
 		String plainCreds = username + ":" + password;
 		byte[] plainCredsBytes = plainCreds.getBytes();
 		String base64Creds = java.util.Base64.getEncoder().encodeToString(plainCredsBytes);
