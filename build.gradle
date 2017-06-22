@@ -14,7 +14,7 @@ apply plugin: 'spring-boot'
 
 jar {
     baseName = 'squirrel-mac-mw'
-    version =  '0.2.1'
+    version =  '0.2.2'
 }
 
 repositories {
