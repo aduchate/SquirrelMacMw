@@ -15,14 +15,14 @@ import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.proxy.AsyncProxyServlet;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.taktik.squirrel.mac.mw.service.NexusQuerierService;
+import org.taktik.squirrel.mac.mw.service.QuerierService;
 
 public class ProxyAsyncDownloadServlet extends AsyncProxyServlet {
-	private final NexusQuerierService nexusQuerierService;
+	private final QuerierService querierService;
 	private Pattern uriParser = Pattern.compile("/d/([a-zA-Z0-9._-]+)/([a-zA-Z0-9._-]+)");
 
-	public ProxyAsyncDownloadServlet(NexusQuerierService nexusQuerierService) {
-		this.nexusQuerierService = nexusQuerierService;
+	public ProxyAsyncDownloadServlet(QuerierService querierService) {
+		this.querierService = querierService;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ProxyAsyncDownloadServlet extends AsyncProxyServlet {
 			String artifactId = matcher.group(2);
 
 			try {
-				return nexusQuerierService.getUri(groupId, artifactId, version).toString();
+				return querierService.getUri(groupId, artifactId, version).toString();
 			} catch (ArtifactResolutionException e) {
 				e.printStackTrace();
 				return null;
@@ -51,7 +51,7 @@ public class ProxyAsyncDownloadServlet extends AsyncProxyServlet {
 
 	@Override
 	protected void sendProxyRequest(HttpServletRequest clientRequest, HttpServletResponse proxyResponse, Request proxyRequest) {
-		proxyRequest.getHeaders().add(new HttpField(HttpHeaders.AUTHORIZATION, nexusQuerierService.getAuthHeader()));
+		proxyRequest.getHeaders().add(new HttpField(HttpHeaders.AUTHORIZATION, querierService.getAuthHeader()));
 		proxyRequest.getHeaders().remove(HttpHeader.ACCEPT);
 		super.sendProxyRequest(clientRequest, proxyResponse, proxyRequest);
 	}

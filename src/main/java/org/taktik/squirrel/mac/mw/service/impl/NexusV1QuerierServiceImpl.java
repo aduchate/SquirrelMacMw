@@ -1,28 +1,24 @@
 package org.taktik.squirrel.mac.mw.service.impl;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 
 import com.thoughtworks.xstream.XStream;
 import org.apache.commons.codec.binary.Base64;
-import org.eclipse.jetty.client.HttpClient;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriTemplateHandler;
 import org.taktik.squirrel.mac.mw.domain.MavenPackage;
 import org.taktik.squirrel.mac.mw.domain.NexusResponse;
-import org.taktik.squirrel.mac.mw.service.NexusQuerierService;
+import org.taktik.squirrel.mac.mw.service.QuerierService;
 
 //@Service
-public class NexusV1QuerierServiceImpl implements NexusQuerierService {
+public class NexusV1QuerierServiceImpl implements QuerierService {
 	@Value("${mw.maven.server}")
 	private String nexusServer;
 

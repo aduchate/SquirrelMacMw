@@ -1,9 +1,16 @@
 buildscript {
     repositories {
-        mavenCentral()
+        maven {
+            credentials {
+                username repoUsername
+                password repoPassword
+            }
+            url = mavenRepository
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.4.RELEASE")
+        classpath 'com.taktik.gradle:gradle-plugin-docker-java:1.0.1'
     }
 }
 
@@ -11,6 +18,14 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'docker-java'
+
+group = 'org.taktik.squirrel'
+version = '0.2.2'
+
+ext {
+    name = 'squirrel-mac-mw'
+}
 
 jar {
     baseName = 'squirrel-mac-mw'

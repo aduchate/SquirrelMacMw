@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriTemplateHandler;
 import org.taktik.squirrel.mac.mw.domain.MavenPackage;
-import org.taktik.squirrel.mac.mw.service.NexusQuerierService;
+import org.taktik.squirrel.mac.mw.service.QuerierService;
 
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -43,7 +43,7 @@ import static java.sql.DriverManager.println;
 
 @Primary
 @Service
-public class MavenQuerierServiceImpl implements NexusQuerierService {
+public class MavenQuerierServiceImpl implements QuerierService {
 	@Value("${mw.maven.username}")
 	private String username;
 
@@ -73,6 +73,7 @@ public class MavenQuerierServiceImpl implements NexusQuerierService {
 		VersionRangeRequest rangeRequest = new VersionRangeRequest();
 		rangeRequest.setArtifact(artifact);
 		rangeRequest.setRepositories(remotes);
+
 
 		VersionRangeResult rangeResult = system.resolveVersionRange(session, rangeRequest);
 

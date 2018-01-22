@@ -14,12 +14,12 @@ import org.springframework.web.util.DefaultUriTemplateHandler;
 import org.taktik.squirrel.mac.mw.domain.MavenPackage;
 import org.taktik.squirrel.mac.mw.domain.UpdateResponse;
 import org.taktik.squirrel.mac.mw.exception.NoContentAvailableException;
-import org.taktik.squirrel.mac.mw.service.NexusQuerierService;
+import org.taktik.squirrel.mac.mw.service.QuerierService;
 
 @RestController
 public class MainController {
 	@Autowired
-	private NexusQuerierService nexusQuerierService;
+	private QuerierService querierService;
 
 	@RequestMapping("/")
 	public String index() {
@@ -40,7 +40,7 @@ public class MainController {
 						 HttpServletResponse response) throws NoContentAvailableException, VersionRangeResolutionException {
 
 		if (version==null) { version = "0.0.0"; }
-		MavenPackage latestVersion = nexusQuerierService.getLatestVersion(groupId, artifactId, request.getRemoteHost());
+		MavenPackage latestVersion = querierService.getLatestVersion(groupId, artifactId, request.getRemoteHost());
 		if (latestVersion.getVersion().equals(version) || version.compareTo(latestVersion.getVersion()) > 0) {
 			throw new NoContentAvailableException();
 		}

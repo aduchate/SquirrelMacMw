@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.taktik.squirrel.mac.mw.service.NexusQuerierService;
+import org.taktik.squirrel.mac.mw.service.QuerierService;
 import org.taktik.squirrel.mac.mw.servlet.ProxyAsyncDownloadServlet;
 
 @Configuration
 public class ProxyDownloadConfiguration {
 	@SuppressWarnings("SpringJavaAutowiringInspection")
 	@Autowired
-	private NexusQuerierService nexusQuerierService;
+	private QuerierService querierService;
 
 	@Bean
 	public ServletRegistrationBean servletRegistrationBean(){
-		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new ProxyAsyncDownloadServlet(nexusQuerierService), "/d/*");
+		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new ProxyAsyncDownloadServlet(querierService), "/d/*");
 
 		servletRegistrationBean.addInitParameter("timeout","3600000");
 
